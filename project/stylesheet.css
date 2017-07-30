@@ -1,0 +1,60 @@
+#navbar ul li{
+    float : left;
+    list-style: none;
+    font-size: 25px;    
+    color:black;
+    margin: auto;
+    margin-right:10px;    
+    margin-left: 5px;
+    margin-top: 7px;
+}
+#navbar ul li a{
+    text-decoration:  none;
+    color:black;
+}
+#navbar {
+    background-color: white;
+    width:70%;
+    min-height: 50px;
+    margin-left: 220px;
+}
+.menu-img{
+    margin-left:260px;
+}
+.menuItems{
+    margin-top:200px;
+}
+.menuItem{    
+    list-style: none;
+    min-height:10%
+}
+.menuItem a{
+    font-size: 24px;
+    color:black;
+    text-decoration: none;
+    margin-left: -5%;
+    padding-top:-10%;
+}
+#content{
+    margin-top: 2%;
+}
+#content-left{
+    float: left;
+    min-height: 70%;
+    max-height:70%;
+    width:25%;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.menuItem hr{
+    margin-left: -38px;
+}
+#content div{
+    /*display: inline-block;*/
+}
+#content-right{
+    
+    margin-left: 35%;
+    text-align: center;
+}

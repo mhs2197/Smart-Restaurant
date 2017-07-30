@@ -1,0 +1,735 @@
+<html>
+<head>
+    	<title> responsive </title>
+		<link rel ="stylesheet" type ="text/css" href= "admin.css">
+		<meta name = "viewport" content= "width=device-width intial-scale=1">
+        <script >
+         function orderFunction() {
+
+        document.getElementById("order-details").style.display = "inline-block";
+             document.getElementById("edit-details").style.display = "none";
+             document.getElementById("employee-info").style.display = "none";
+         }
+            
+             function editFunction() {
+
+        document.getElementById("order-details").style.display = "none";
+             document.getElementById("edit-details").style.display = "inline-block";
+                 document.getElementById("employee-info").style.display = "none";
+         }
+            
+            function employeeFunction() {
+
+        document.getElementById("order-details").style.display = "none";
+             document.getElementById("edit-details").style.display = "none";
+                document.getElementById("employee-info").style.display = "inline-block"; 
+         }    
+            
+            
+            
+            function addItems(){
+                 document.getElementById("add-items").style.display = "inline-block";
+             document.getElementById("remove-items").style.display = "none";
+                document.getElementById("update-items").style.display = "none";
+            }
+            
+                        function removeItems(){
+                 document.getElementById("add-items").style.display = "none";
+             document.getElementById("remove-items").style.display = "inline-block";
+                              document.getElementById("update-items").style.display = "none";
+            }
+            
+                      function updateItems(){
+                 document.getElementById("add-items").style.display = "none";
+             document.getElementById("remove-items").style.display = "none";
+                          document.getElementById("update-items").style.display = "inline-block";
+            }
+            
+            
+             function addEmployee(){
+                 document.getElementById("add-employee").style.display = "inline-block";
+             document.getElementById("remove-employee").style.display = "none";
+                 document.getElementById("update-employee").style.display="none";
+            }
+            
+                        function removeEmployee(){
+                 document.getElementById("add-employee").style.display = "none";
+             document.getElementById("remove-employee").style.display = "inline-block";
+                            document.getElementById("update-employee").style.display="none";
+            }
+            
+                        function updateEmployee(){
+                 document.getElementById("add-employee").style.display = "none";
+             document.getElementById("remove-employee").style.display = "none";
+                            document.getElementById("update-employee").style.display="inline-block";
+            }
+            function addFood(){
+			var obj = new XMLHttpRequest();
+			var form = document.getElementsByTagName("form")[0];
+			var formData = new FormData(form);
+			obj.open('POST', 'addItem.php', true);
+			obj.send(formData);
+			obj.onreadystatechange = function(){
+				if(obj.readyState==4){
+					
+					if(obj.responseText=="Item added")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Category added")
+					{
+						alert(obj.responseText);
+					}
+                    
+                    else if(obj.responseText=="Please enter food name")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Please enter food price")
+					{
+						alert(obj.responseText);
+					}               
+                    else if(obj.responseText=="Please select a category")
+					{
+						alert(obj.responseText);
+					}  
+                    else if(obj.responseText=="Please enter category name")
+					{
+						alert(obj.responseText);
+					}
+                    
+                    
+				}	
+			}
+			
+		  }	
+            function addCategory(){
+			var obj = new XMLHttpRequest();
+			var form = document.getElementsByTagName("form")[1];
+			var formData = new FormData(form);
+			obj.open('POST', 'addCategory.php', true);
+			obj.send(formData);
+			obj.onreadystatechange = function(){
+				if(obj.readyState==4){
+					
+					if(obj.responseText=="Category added")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Please enter category name")
+					{
+						alert(obj.responseText);
+					}
+                    
+				}	
+			}
+			
+		  }	
+            
+            function searchItem(value)
+            {
+                var div=document.getElementById("searchDIV");
+                div.style.display = 'block';
+                if(value.length!=0){
+                    
+                           
+                        
+                    var obj = new XMLHttpRequest();
+                    
+                    obj.open('GET', 'search.php?name='+value, true);
+                    obj.send();
+                    
+                    obj.onreadystatechange = function()
+                    {			
+                        if(obj.readyState==4)
+                        {
+                            var div = document.getElementById("searchResult");
+                            div.innerHTML = obj.responseText;
+                        }
+                    }
+                    
+                }
+                else
+                    {
+                        div.style.display = 'none';
+                    }
+            }
+            function selectItem(fname)
+            {
+                document.getElementsByTagName("span")[0].innerHTML = fname;
+                var div=document.getElementById("searchDIV");
+                div.style.display = 'none';
+                    
+            }
+            
+            function deleteItem()
+            {
+               var obj = new XMLHttpRequest();
+                var name = document.getElementById("selectedItem").innerText;
+              
+                var formData = new FormData();
+                formData.append('name',name);
+                obj.open('POST', 'deleteItem.php', true);
+                obj.send(formData);
+                obj.onreadystatechange = function()
+                {
+                    if(obj.readyState==4)
+                    {
+                        if(obj.responseText=="Item deleted")                    
+                            alert(obj.responseText);
+                    }
+                }
+            }
+            function searchUpdateItem(value)
+            {
+                var div=document.getElementById("searchUpdateDIV");
+                div.style.display = 'block';
+                if(value.length!=0){
+                    
+                           
+                        
+                    var obj = new XMLHttpRequest();
+                    
+                    obj.open('GET', 'searchUpdate.php?name='+value, true);
+                    obj.send();
+                    
+                    obj.onreadystatechange = function()
+                    {			
+                        if(obj.readyState==4)
+                        {
+                            var div = document.getElementById("searchUpdateResult");
+                            div.innerHTML = obj.responseText;
+                        }
+                    }
+                    
+                }
+                else
+                    {
+                        div.style.display = 'none';
+                    }
+            }
+            function selectUpdateItem(fname)
+            {
+                document.getElementsByTagName("span")[1].innerHTML = fname;
+                var div=document.getElementById("searchUpdateDIV");
+                div.style.display = 'none';
+                    
+            }
+            function updateItem()
+            {
+                
+               var obj = new XMLHttpRequest();
+               var name = document.getElementById("selectUpdateItem").innerText;
+               document.getElementById("hiddenName").value = name;
+                var form = document.getElementsByTagName("form")[3];
+                var formData = new FormData(form);
+                obj.open('POST', 'updateItem.php', true);
+                obj.send(formData);
+                obj.onreadystatechange = function(){
+                    if(obj.readyState==4){
+
+                        if(obj.responseText=="Item updated")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please search and select food item")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please enter food name")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please enter food price")
+                        {
+                            alert(obj.responseText);
+                        }               
+                        else if(obj.responseText=="Please select a category")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else
+                        {
+                            alert(obj.responseText);
+                        }
+                    }
+                }
+            }
+            
+            function newEmployee(){
+			var obj = new XMLHttpRequest();
+			var form = document.getElementsByTagName("form")[4];
+			var formData = new FormData(form);
+			obj.open('POST', 'addEmployee.php', true);
+			obj.send(formData);
+			obj.onreadystatechange = function(){
+				if(obj.readyState==4){
+					
+					if(obj.responseText=="Employee added")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Please enter employee id")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Please enter employee name")
+					{
+						alert(obj.responseText);
+					}
+                    else if(obj.responseText=="Please enter employee address")
+					{
+						alert(obj.responseText);
+					}               
+                    else if(obj.responseText=="Please select employee post")
+					{
+						alert(obj.responseText);
+					}  
+				}	
+			}
+			
+		  }	
+           function searchEmployee(value)
+            {
+                var div=document.getElementById("searchEmployeeDIV");
+                div.style.display = 'block';
+                if(value.length!=0){
+                    
+                           
+                        
+                    var obj = new XMLHttpRequest();
+                    
+                    obj.open('GET', 'searchEmployee.php?id='+value, true);
+                    obj.send();
+                    
+                    obj.onreadystatechange = function()
+                    {			
+                        if(obj.readyState==4)
+                        {
+                            var div = document.getElementById("searchEmployeeResult");
+                            div.innerHTML = obj.responseText;
+                        }
+                    }
+                    
+                }
+                else
+                    {
+                        div.style.display = 'none';
+                    }
+            }
+            
+            function selectEmployee(id)
+            {
+                document.getElementsByTagName("span")[2].innerHTML = id;
+                var div=document.getElementById("searchEmployeeDIV");
+                div.style.display = 'none';
+                    
+            }
+            
+            function deleteEmployee()
+            {
+               var obj = new XMLHttpRequest();
+                var id = document.getElementById("selectedEmployee").innerText;
+              
+                var formData = new FormData();
+                formData.append('id',id);
+                obj.open('POST', 'deleteEmployee.php', true);
+                obj.send(formData);
+                obj.onreadystatechange = function()
+                {
+                    if(obj.readyState==4)
+                    {
+                        if(obj.responseText=="Employee deleted")                    
+                            alert(obj.responseText);
+                    }
+                }
+            }
+            
+            
+            function searchEmployee2(value)
+            {
+                var div=document.getElementById("searchEmployeeDIV2");
+                div.style.display = 'block';
+                if(value.length!=0){
+                    
+                           
+                        
+                    var obj = new XMLHttpRequest();
+                    
+                    obj.open('GET', 'searchEmployee2.php?id='+value, true);
+                    obj.send();
+                    
+                    obj.onreadystatechange = function()
+                    {			
+                        if(obj.readyState==4)
+                        {
+                            var div = document.getElementById("searchEmployeeResult2");
+                            div.innerHTML = obj.responseText;
+                        }
+                    }
+                    
+                }
+                else
+                    {
+                        div.style.display = 'none';
+                    }
+            }
+            function selectEmployee2(id)
+            {
+                document.getElementsByTagName("span")[3].innerHTML = id;
+                var div=document.getElementById("searchEmployeeDIV2");
+                div.style.display = 'none';
+                    
+            }
+            function updateEmployeeInfo()
+            {
+                
+               var obj = new XMLHttpRequest();
+               var id = document.getElementById("selectedEmployee2").innerText;
+               document.getElementById("hiddenEmpployeeID").value = id;
+                
+                var form = document.getElementsByTagName("form")[6];
+                var formData = new FormData(form);
+                obj.open('POST', 'updateEmployeeInfo.php', true);
+                obj.send(formData);
+                obj.onreadystatechange = function(){
+                    if(obj.readyState==4){
+
+                        if(obj.responseText=="Employee information updated")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please search and select employee id")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please enter employee name")
+                        {
+                            alert(obj.responseText);
+                        }
+                        else if(obj.responseText=="Please enter employee address")
+                        {
+                            alert(obj.responseText);
+                        }               
+                        else if(obj.responseText=="Please select a employee post")
+                        {
+                            alert(obj.responseText);
+                        }  
+                        
+                    }
+                }
+            }
+
+    </script>
+</head>
+	<body >
+	
+		<div id = "parent">
+		<div id ="content" class= "admin">
+				<img src = "cart1.jpg" alt ="Admin" style="height:80px; border-radius : 50%;" />
+				<br>
+				<h2> Admin </h2>
+				<br>
+				<ul>
+					<li> <a href ="#" onclick="orderFunction()">Orders</a> </li>
+					<li><a href ="#"  onclick="editFunction()"> Edit menu </a> </li>
+					<li><a href ="#" onclick = "employeeFunction()"> Employee  </a> </li>
+				</ul>
+
+		</div>
+		
+         
+		<div id ="order-details" class = "admin">
+            <div id ="order-details-header"> 
+                <h2 align = "center"> Orders</h2>
+            </div>
+            
+            <div id="order-details-body">
+                
+                <table border="1px">
+                    <tr>
+                        <td align = "center">Serial number</td>
+                        <td align = "center">Order id</td>
+                        <td align = "center">Price</td>
+                        <td align = "center">Status</td>
+                        <td align = "center">Button</td>
+                    </tr>
+                    
+                     <tr>
+                        <td align = "center">001</td>
+                        <td align = "center">017225273</td>
+                        <td align = "center">220 TK</td>
+                        <td align = "center">Cooking</td>
+                        <td align = "center"><input type ="button" value="delete"  id="btn-delete"></td>
+                    </tr>  
+                </table>
+                
+            </div>
+			
+			
+		</div>
+            
+    
+            
+    <div id ="edit-details" class = "admin" style="display: none;">
+        <div id ="edit-details-header"> 
+                <h2 align = "center"> Edit Menu</h2>
+        </div>
+            
+            
+        <div id="edit-navbar">
+                
+                	<ul id = "navbar-list">
+				<li> <a href ="#" onclick="addItems()"> Add Items </a> </li>
+				<li> <a href ="#" onclick="removeItems()">Remove Items</a> </li>
+				<li> <a href ="#" onclick="updateItems()">Update Items </a> </li>
+				
+			
+			</ul>
+                
+                
+                
+        </div>
+            
+        <div id= "edit-body">
+                
+            <div id="add-items">
+                <div id = "left" >
+                        
+                        <form method="post" action="addItem.php">
+                              <p>  Name &nbsp 
+                                <input  name = "iteam-name"> </p> 
+                            <p class="margin">    Price &nbsp &nbsp
+                                <input  name = "iteam-price"> </p>
+                                <p class="margin"> Category &nbsp 
+                                    <select name="category">
+                                            <option value="">Select one..</option>
+                                            <option value="appetizer">Appetizer</option>
+                                            <option value="burgers">Burgers</option>
+                                            <option value="sides">Sides</option>
+                                            <option value="mains">Mains</option>
+                                            <option value="drinks">Drinks</option>
+                                    </select>
+                                    </p>
+                                    
+                                <input type="button" value="Add" onclick="addFood()" class="margin" id="submit-info">
+                                
+                            
+                    
+                                </form>
+                    
+                    
+                </div>
+                
+             <div id="right" >
+                        
+                                <form method="post" action="addCategory.php">
+                                  <p >  Category &nbsp 
+                                      <input  name = "categoryNew" value> </p> 
+                                <input type="button" value="Add" onclick="addCategory()" class="margin" id= "submit-info">
+                    
+                                </form>
+                        
+                    
+            </div>
+                
+          </div>
+                
+                <div id="remove-items" style="display: none;">
+                    <form>
+                       <p class="margin"> Search Food Name : 
+                           <input type="text" onkeyup="searchItem(this.value)" placeholder="Search food names.."><br/>
+                           </p>
+                           <div id="searchDIV" style="background-color:gray; position:absolute; margin-left: 14%; width:15.5%">
+                               <ul id="searchResult" style="list-style-type: none;"></ul>
+                           </div>
+                        
+                        <br/>
+                        <br/>
+                        <p class="margin" align="left"> Name : <span id="selectedItem"></span> </p>
+                        <input type="button" value="Delete" onclick="deleteItem()" class="margin" id="submit-info" >
+                        
+                        
+                        
+                    </form>
+                            
+                
+                </div>    
+            
+               <div id="update-items" style="display: none;">
+                    <form>
+                     <p class="margin" >   Search food name:
+                     <input type="text" onkeyup="searchUpdateItem(this.value)" placeholder="Search food names.."><br/>
+                    </p>
+                    <div id="searchUpdateDIV" style="background-color:gray; position:absolute; margin-left: 10.6%; width:12.7%;">
+                       <ul id="searchUpdateResult" style="list-style-type: none;"></ul>
+                   </div>
+                    <br/>
+                        <br/>
+                        <p class="margin" align="left"> Name : 
+                            <span id="selectUpdateItem"></span>
+                        </p>
+                        <input type="hidden" name="name" id="hiddenName" value="">
+                        <p class="margin">  Update Food Name: 
+                            <input name="update-item-name">
+                        </p>
+                        <p class="margin">    Price 
+                            <input name="update-item-price">
+                        </p>
+                            <p class="margin"> Category &nbsp 
+                                    <select name="update-category">
+                                            <option value="">Select one..</option>
+                                            <option value="appetizer">Appetizer</option>
+                                            <option value="burgers">Burgers</option>
+                                            <option value="sides">Sides</option>
+                                            <option value="mains">Mains</option>
+                                            <option value="drinks">Drinks</option>
+                                    </select>
+                                    </p>
+                       &nbsp  &nbsp &nbsp &nbsp  &nbsp &nbsp  <input type="button" value="update" onclick="updateItem()" class="margin" id="submit-info">
+                        
+                    </form>
+                            
+                
+                </div>   
+                    
+            </div>
+			
+			
+		</div>
+        
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        <div id = "employee-info" style="display: none;">
+          
+    
+            
+    
+        <div id ="employee-details-header"> 
+                <h2 align = "center"> Employee Info</h2>
+        </div>
+            
+            
+        <div id="employee-navbar">
+                
+                	<ul id = "employee-navbar-list">
+				<li> <a href ="#" onclick="addEmployee()"> Add Employee </a> </li>
+				<li> <a href ="#" onclick="removeEmployee()">Remove Employee</a> </li>
+				<li> <a href ="#" onclick="updateEmployee()">Update Employee </a> </li>
+				
+			
+			</ul>
+                
+                
+                
+        </div>
+            
+        <div id= "employee-body">
+                
+            <div id="add-employee">
+                <div id = "left-employee" >
+                        
+                                <form id="padding" method="post" action="addEmployee.php">
+                                Id &nbsp  &nbsp &nbsp &nbsp  &nbsp
+                                <input type="text" name = "employee-id"> <br>
+                               <p class="margin">  Name &nbsp   &nbsp
+                                <input type="text" name = "employee-name"> </p>
+                                    
+                                     <p class="margin">
+                                    Address  <input type="text" name = "employee-address">
+                                    </p> 
+                                <p class="margin">
+                                    Post &nbsp &nbsp  &nbsp  
+                                    <select name="employee-post">
+                                            <option value="">Select One</option>
+                                            <option value="staff">Staff</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="cook">Cook</option>
+                                            
+                                    </select>
+                                    
+                                    </p>
+                                  
+                                  &nbsp  &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp   
+                                <input type="button" value="Add" onclick="newEmployee()" class="margin" id="submit-info">
+                                
+                                </form>
+                    
+                    
+                    
+                </div>
+                
+           
+                
+          </div>
+                
+                <div id="remove-employee" style="display: none;">
+                    
+                     <form id="padding">
+                       <p class="margin"> Search Employee ID : 
+                           <input type="text" onkeyup="searchEmployee(this.value)" placeholder="Search employee id.."><br/>
+                           </p>
+                           <div id="searchEmployeeDIV" style="background-color:gray; position:absolute; margin-left: 12.26%; width:12.6%">
+                               <ul id="searchEmployeeResult" style="list-style-type: none;"></ul>
+                           </div>
+                        
+                        <br/>
+                        <br/>
+                        <p class="margin" align="left"> ID : <span id="selectedEmployee"></span> </p>
+                        &nbsp  &nbsp &nbsp &nbsp  &nbsp &nbsp <input type="button" value="Delete" onclick="deleteEmployee()" class="margin" id="submit-info" >
+                    </form>
+                
+                </div>    
+            
+            
+             <div id="update-employee" style="display: none;">
+                    <form id="padding">
+                     <p class="margin" >  Search Employee ID :
+                        <input type="text" onkeyup="searchEmployee2(this.value)" placeholder="Search employee id..">
+                     </p>
+                        <div id="searchEmployeeDIV2" style="background-color:gray; position:absolute; margin-left: 12.26%; width:12.6%">
+                               <ul id="searchEmployeeResult2" style="list-style-type: none;"></ul>
+                           </div>
+                        
+                        <br/>
+                        <br/>
+                        <p class="margin" align="left"> ID : <span id="selectedEmployee2"></span> 
+                        <input type="hidden" name="id" id="hiddenEmpployeeID" value="">
+                        </p>
+                        
+                        <p class="margin">    Name: <input name="update-employee-name">  </p>
+                        <p class="margin">    Address: <input name="update-employee-address">  </p>
+                        
+                            <p class="margin">
+                                    Post: &nbsp &nbsp  &nbsp  
+                                    <select name="update-employee-post">
+                                            <option value="">Select One</option>
+                                            <option value="staff">Staff</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="cook">Cook</option>
+                                            
+                                    </select>
+                                    
+                                    </p>
+                       &nbsp  &nbsp &nbsp &nbsp  &nbsp &nbsp  <input type="button" value="Update" onclick="updateEmployeeInfo()" class="margin" id="submit-info">
+                        
+                    </form>
+                            
+                
+                </div>   
+                    
+            </div>
+            
+            </div>    
+            
+		</div>
+	</body>
+</html>
